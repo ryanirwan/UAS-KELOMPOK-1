@@ -12,3 +12,18 @@ st.title("💰 Aplikasi Pengeluaran Sederhana")
 df = load_data()
 
 tab1, tab2 = st.tabs(["📊 Data", "➕ Tambah"])
+
+(gebby)
+if st.button("Simpan"):
+        if nominal > 0:
+            baru = pd.DataFrame([{
+                "Tanggal": tanggal,
+                "Kategori": kategori,
+                "Nominal": nominal,
+                "Deskripsi": deskripsi
+            }])
+            df = pd.concat([baru, df], ignore_index=True)
+            save_data(df)
+            st.success("Data tersimpan!")
+        else:
+            st.error("Nominal harus lebih dari 0.")
