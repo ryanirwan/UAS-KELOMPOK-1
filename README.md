@@ -1,4 +1,5 @@
 # TUGAS BESAR-UAS-KELOMPOK-1
+(ismail)
         return df.sort_values("Tanggal", ascending=False).reset_index(drop=True)
     return pd.DataFrame(columns=["Tanggal", "Kategori", "Nominal", "Deskripsi"])
 
