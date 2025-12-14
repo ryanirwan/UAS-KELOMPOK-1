@@ -5,7 +5,7 @@
 def save_data(df):
     df.to_csv(CSV_FILE, index=False)
 
-# APLIKASI
+
 st.title("💰 Aplikasi Pengeluaran Sederhana")
 
 df = load_data()
