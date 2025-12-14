@@ -1,4 +1,18 @@
 # TUGAS BESAR-UAS-KELOMPOK-1
+(Radit)
+import streamlit as st
+import pandas as pd
+import os
+
+CSV_FILE = "pengeluaran.csv"
+
+# LOAD & SAVES
+def load_data():
+    if os.path.exists(CSV_FILE):
+        df = pd.read_csv(CSV_FILE)
+        df["Tanggal"] = pd.to_datetime(df["Tanggal"], format="mixed").dt.date 
+
+
 (ismail)
         return df.sort_values("Tanggal", ascending=False).reset_index(drop=True)
     return pd.DataFrame(columns=["Tanggal", "Kategori", "Nominal", "Deskripsi"])
