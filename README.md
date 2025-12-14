@@ -13,6 +13,25 @@ df = load_data()
 
 tab1, tab2 = st.tabs(["📊 Data", "➕ Tambah"])
 
+(Samuel Rizaldi Manalu)
+with tab1:
+    st.header("Data Pengeluaran")
+
+    if df.empty:
+        st.info("Belum ada data.")
+    else:
+        st.write("### Total Pengeluaran")
+        st.metric("Total", f"Rp {df['Nominal'].sum():,}")
+
+        st.write("### Tabel Data")
+        st.dataframe(df)
+
+        st.write("### Grafik Per Kategori")
+        st.bar_chart(df.groupby("Kategori")["Nominal"].sum())
+
+        st.write("---")
+        st.write("### Hapus Data")
+
 (gebby)
 if st.button("Simpan"):
         if nominal > 0:
@@ -27,3 +46,5 @@ if st.button("Simpan"):
             st.success("Data tersimpan!")
         else:
             st.error("Nominal harus lebih dari 0.")
+
+
