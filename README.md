@@ -1,19 +1,16 @@
 # TUGAS BESAR-UAS-KELOMPOK-1
-(Radit)
+
 import streamlit as st
 import pandas as pd
 import os
 
 CSV_FILE = "pengeluaran.csv"
 
-# LOAD & SAVES
+
 def load_data():
     if os.path.exists(CSV_FILE):
         df = pd.read_csv(CSV_FILE)
         df["Tanggal"] = pd.to_datetime(df["Tanggal"], format="mixed").dt.date 
-
-
-(ismail)
         return df.sort_values("Tanggal", ascending=False).reset_index(drop=True)
     return pd.DataFrame(columns=["Tanggal", "Kategori", "Nominal", "Deskripsi"])
 
@@ -27,40 +24,13 @@ df = load_data()
 
 tab1, tab2 = st.tabs(["📊 Data", "➕ Tambah"])
 
-(Samuel Rizaldi Manalu)
-with tab1:
-    st.header("Data Pengeluaran")
+with tab2:
+    st.header("Tambah Pengeluaran")
+    tanggal = st.date_input("Tanggal")
+    kategori = st.selectbox("Kategori", ["Makanan", "Transportasi", "Belanja", "Tagihan", "Lain-lain"])
+    nominal = st.number_input("Nominal (Rp)", min_value=0)
+    deskripsi = st.text_input("Deskripsi (opsional)")
 
-    if df.empty:
-        st.info("Belum ada data.")
-    else:
-        st.write("### Total Pengeluaran")
-        st.metric("Total", f"Rp {df['Nominal'].sum():,}")
-
-        st.write("### Tabel Data")
-        st.dataframe(df)
-
-        st.write("### Grafik Per Kategori")
-        st.bar_chart(df.groupby("Kategori")["Nominal"].sum())
-
-        st.write("---")
-        st.write("### Hapus Data")
-
-        (Ali)
-
-        # Hapus data
-        idx = st.number_input("Hapus baris ke:", 
-                              min_value=0, 
-                              max_value=len(df)-1, 
-                              step=1)
-
-        if st.button("Hapus Baris"):
-            df = df.drop(idx).reset_index(drop=True)
-            save_data(df)
-            st.success(f"Baris ke-{idx} dihapus!")
-
-
-(gebby)
 if st.button("Simpan"):
         if nominal > 0:
             baru = pd.DataFrame([{
@@ -76,3 +46,26 @@ if st.button("Simpan"):
             st.error("Nominal harus lebih dari 0.")
 
 
+with tab1:
+    st.header("Data Pengeluaran")
+    if df.empty:
+        st.info("Belum ada data.")
+    else:
+        st.write("### Total Pengeluaran")
+        st.metric("Total", f"Rp {df['Nominal'].sum():,}")
+        st.write("### Tabel Data")
+        st.dataframe(df)
+        st.write("### Grafik Per Kategori")
+        st.bar_chart(df.groupby("Kategori")["Nominal"].sum())
+        st.write("---")
+        st.write("### Hapus Data")
+        idx = st.number_input("Hapus baris ke:", 
+                              min_value=0, 
+                              max_value=len(df)-1, 
+                              step=1)
+        if st.button("Hapus Baris"):
+            df = df.drop(idx).reset_index(drop=True)
+            save_data(df)
+            st.success(f"Baris ke-{idx} dihapus!")
+
+            
