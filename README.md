@@ -68,4 +68,10 @@ with tab1:
             save_data(df)
             st.success(f"Baris ke-{idx} dihapus!")
 
+            # Hapus semua
+        if st.button("Hapus Semua Data"):
+            df = df.iloc[0:0]
+            save_data(df)
+            st.success("Semua data terhapus!")
+
             
