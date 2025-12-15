@@ -46,6 +46,20 @@ with tab1:
         st.write("---")
         st.write("### Hapus Data")
 
+        (Ali)
+
+        # Hapus data
+        idx = st.number_input("Hapus baris ke:", 
+                              min_value=0, 
+                              max_value=len(df)-1, 
+                              step=1)
+
+        if st.button("Hapus Baris"):
+            df = df.drop(idx).reset_index(drop=True)
+            save_data(df)
+            st.success(f"Baris ke-{idx} dihapus!")
+
+
 (gebby)
 if st.button("Simpan"):
         if nominal > 0:
