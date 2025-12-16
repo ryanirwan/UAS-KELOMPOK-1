@@ -1,11 +1,9 @@
 # TUGAS BESAR-UAS-KELOMPOK-1
-
 import streamlit as st
 import pandas as pd
 import os
 
 CSV_FILE = "pengeluaran.csv"
-
 
 def load_data():
     if os.path.exists(CSV_FILE):
@@ -17,11 +15,8 @@ def load_data():
 def save_data(df):
     df.to_csv(CSV_FILE, index=False)
 
-
 st.title("💰 Aplikasi Pengeluaran Sederhana")
-
 df = load_data()
-
 tab1, tab2 = st.tabs(["📊 Data", "➕ Tambah"])
 
 with tab2:
@@ -44,8 +39,6 @@ if st.button("Simpan"):
             st.success("Data tersimpan!")
         else:
             st.error("Nominal harus lebih dari 0.")
-
-
 with tab1:
     st.header("Data Pengeluaran")
     if df.empty:
