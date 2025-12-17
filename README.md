@@ -11,7 +11,7 @@ def load_data():
         df["Tanggal"] = pd.to_datetime(df["Tanggal"], format="mixed").dt.date 
         return df.sort_values("Tanggal", ascending=False).reset_index(drop=True)
     return pd.DataFrame(columns=["Tanggal", "Kategori", "Nominal", "Deskripsi"])
-
+    
 def save_data(df):
     df.to_csv(CSV_FILE, index=False)
 
